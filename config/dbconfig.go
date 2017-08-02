@@ -22,7 +22,7 @@ func DBUrl() string {
 	dburl := os.Getenv("MLAB_URL")
 
 	if dburl == "" {
-		dburl = "localhost"
+		dburl = "mongodb://aligos:aligos555@ds127993.mlab.com:27993"
 	}
 
 	return dburl
