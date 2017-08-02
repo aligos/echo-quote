@@ -2,6 +2,7 @@ package quoteactions
 
 import (
 	"errors"
+	"math/rand"
 	"time"
 
 	quote "github.com/aligos/echo-quote/api/quote/model"
@@ -10,6 +11,35 @@ import (
 )
 
 const col string = "quotes"
+
+func GetRandomQuote() (quote.Quote, error) {
+	var q quote.Quote
+	db := dbconfig.DB{}
+	qs := quote.Quotes{}
+
+	s, err := db.DoDial()
+
+	if err != nil {
+		return q, errors.New("There was an error trying to connect with the DB.")
+	}
+
+	defer s.Close()
+
+	c := s.DB(db.Name()).C(col)
+
+	err = c.Find(bson.M{}).All(&qs)
+	rand.Seed(time.Now().UnixNano())
+	for i := len(qs) - 1; i > 0; i-- {
+		j := rand.Intn(i + 1)
+		q = qs[j]
+	}
+
+	if err != nil {
+		return q, errors.New("There was an error trying to find the todos.")
+	}
+
+	return q, err
+}
 
 func All() (quote.Quotes, error) {
 	db := dbconfig.DB{}
@@ -34,9 +64,9 @@ func All() (quote.Quotes, error) {
 	return qs, err
 }
 
-func GetById(id string) (quote.Quotes, error) {
+func GetById(id string) (quote.Quote, error) {
 	db := dbconfig.DB{}
-	q := quote.Quotes{}
+	q := quote.Quote{}
 
 	s, err := db.DoDial()
 

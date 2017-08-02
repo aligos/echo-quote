@@ -8,6 +8,12 @@ import (
 	"github.com/labstack/echo"
 )
 
+func GetRandomQuote(c echo.Context) error {
+	q, _ := quoteactions.GetRandomQuote()
+
+	return c.JSON(http.StatusOK, q)
+}
+
 func GetAll(c echo.Context) error {
 	qs, _ := quoteactions.All()
 
