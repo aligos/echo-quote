@@ -129,7 +129,7 @@ func DeleteQuote(id string) error {
 	err = c.RemoveId(idoi)
 
 	if err != nil {
-		return errors.New("There was an error trying to remove the todo.")
+		return errors.New("There was an error trying to remove the quote.")
 	}
 
 	return err
