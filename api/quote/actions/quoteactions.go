@@ -35,7 +35,7 @@ func GetRandomQuote() (quote.Quote, error) {
 	}
 
 	if err != nil {
-		return q, errors.New("There was an error trying to find the todos.")
+		return q, errors.New("There was an error trying to find the quotes.")
 	}
 
 	return q, err
@@ -58,7 +58,7 @@ func All() (quote.Quotes, error) {
 	err = c.Find(bson.M{}).All(&qs)
 
 	if err != nil {
-		return qs, errors.New("There was an error trying to find the todos.")
+		return qs, errors.New("There was an error trying to find the quotes.")
 	}
 
 	return qs, err
@@ -81,7 +81,7 @@ func GetById(id string) (quote.Quote, error) {
 	err = c.Find(bson.M{"_id": bson.ObjectIdHex(id)}).One(&q)
 
 	if err != nil {
-		return q, errors.New("There was an error trying to find the todos.")
+		return q, errors.New("There was an error trying to find the quotes.")
 	}
 
 	return q, err
