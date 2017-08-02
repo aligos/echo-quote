@@ -24,7 +24,7 @@ func DBUrl() string {
 
 	if dburl == "" {
 		dburl = "localhost"
-		fmt.Println(dburl)
+		fmt.Println("RORORORORO")
 	}
 
 	return dburl
