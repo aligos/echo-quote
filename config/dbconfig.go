@@ -1,7 +1,6 @@
 package dbconfig
 
 import (
-	"fmt"
 	"os"
 
 	"gopkg.in/mgo.v2"
@@ -24,7 +23,6 @@ func DBUrl() string {
 
 	if dburl == "" {
 		dburl = "localhost"
-		fmt.Println("RORORORORO")
 	}
 
 	return dburl
